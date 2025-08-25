@@ -11,6 +11,7 @@ class Character:
         self.health = health
         self.mana = mana
         self.name = name
+        self.spells = []
 
     def damage(self, damage):
         self.health -= damage
@@ -41,6 +42,20 @@ class Character:
         print(f"{self.name} атакует {target.name}")
         target.damage(damage)
 
+class Spell:
+    def __init__(self, name, damage, mana_cost):
+        self.name = name
+        self.damage = damage
+        self.mana_cost = mana_cost
+
+    def cast(self, caster, target):
+        if caster.mana < self.mana_cost:
+            print(f"Недостаточно маны для {self.name}")
+            return False
+        caster.mana -= self.mana_cost
+        print(f"{caster.name} применяет {self.name} и наносит {self.damage} урона {target.name}")
+        target.damage(self.damage)
+        return True
 
 class Enemy(Character):
     def attack(self, target, damage):
