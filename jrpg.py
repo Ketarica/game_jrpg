@@ -3,6 +3,7 @@ def hp_bar(current, maximum, length=20, symbol="█"):
     empty = length - filled
     return f"[{symbol * filled}{' ' * empty}] {current}/{maximum}"
 
+
 class Character:
     def __init__(self, health, mana, name):
         self.max_health = health
@@ -39,11 +40,6 @@ class Character:
     def attack(self, target, damage):
         print(f"{self.name} атакует {target.name}")
         target.damage(damage)
-
-
-
-
-
 
 
 class Enemy(Character):
@@ -105,22 +101,22 @@ def cycle(hero, enemy):
 
 
         elif command == "attack":
-                    damage = int(input("Введите урон, который враг нанесёт герою: "))
-                    enemy.attack(hero, damage)
-                    if hero.health <= 0:
-                        print("Персонаж мертв")
-                        print("Желаете создать нового персонажа?")
-                        ans = input("Введите команду yes или no: ").strip().lower()
-                        if ans == "yes":
-                            hero.health = 0
-                            hero.name =""
-                            hero.damage = 0
-                            newHero = hero_creator.create()
-                            hero = newHero
-                            cycle(hero, enemy)
-                        else:
-                            print("Выход из игры")
-                            break
+            damage = int(input("Введите урон, который враг нанесёт герою: "))
+            enemy.attack(hero, damage)
+            if hero.health <= 0:
+                print("Персонаж мертв")
+                print("Желаете создать нового персонажа?")
+                ans = input("Введите команду yes или no: ").strip().lower()
+                if ans == "yes":
+                    hero.health = 0
+                    hero.name = ""
+                    hero.damage = 0
+                    newHero = hero_creator.create()
+                    hero = newHero
+                    cycle(hero, enemy)
+                else:
+                    print("Выход из игры")
+                    break
 
 
 
@@ -129,15 +125,17 @@ def cycle(hero, enemy):
                 print("Недостаточно маны")
                 continue
             if caster:
-                    spell_name = (input(f"Введите название заклинания. У вас доступны: {spell_select} на {spell_dmg} единиц урона:\n"))
-                    if spell_name == spell_select:
-                        hero.attack(enemy, spell_dmg)
-                        hero.mana = hero.mana - 10
-                        spell_check = False
-                        caster = False
-                    else:
-                        print("У вас нету этого заклинания")
-            else: print("Выбор заклинания не сделан")
+                spell_name = (input(
+                    f"Введите название заклинания. У вас доступны: {spell_select} на {spell_dmg} единиц урона:\n"))
+                if spell_name == spell_select:
+                    hero.attack(enemy, spell_dmg)
+                    hero.mana = hero.mana - 10
+                    spell_check = False
+                    caster = False
+                else:
+                    print("У вас нету этого заклинания")
+            else:
+                print("Выбор заклинания не сделан")
 
             if hero.health <= 0:
                 print("Персонаж мертв")
@@ -151,7 +149,7 @@ def cycle(hero, enemy):
                     hero = newHero
                     cycle(hero, enemy)
                 else:
-                        print("Выход из игры")
+                    print("Выход из игры")
                 continue
         elif command == "quit":
             print("Выход из игры.")
@@ -159,4 +157,5 @@ def cycle(hero, enemy):
     else:
         print("Неизвестная команда.")
 
-cycle(hero,enemy)
+
+cycle(hero, enemy)
