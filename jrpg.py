@@ -160,6 +160,3 @@ def cycle(hero, enemy):
         print("Неизвестная команда.")
 
 cycle(hero,enemy)
-
-
-# py_charm test
